@@ -2,7 +2,7 @@ let imagesData = [
     {
         photo: 'images/city.jpg',
         title: 'City',
-        description: 'City in the afternoon'
+        description: 'Sunset in the city'
     },
     {
         photo: 'images/desertmoon.jpg',
