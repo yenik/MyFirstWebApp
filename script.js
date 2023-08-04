@@ -26,19 +26,46 @@ let imagesData = [
     },
     {
         photo: 'images/redrose.jpg',
-        title: 'Red rose',
+        title: 'Rose',
         description: 'Beautiful but not so delicate'
     },
 ];
 
-let currentPhoto = 2;
-
-$('#photo').attr('src', imagesData[currentPhoto].photo);
-$('#photo-title').append(`${imagesData[currentPhoto].title}`);
-$('#photo-description').append(`${imagesData[currentPhoto].description}`);
+let currentPhoto = 0;
 
 function loadPhoto(currentPhoto) {
     $('#photo').attr('src', imagesData[currentPhoto].photo);
-    $('#photo-title').append(`${imagesData[currentPhoto].title}`);
-    $('#photo-description').append(`${imagesData[currentPhoto].description}`);
-  }
+    $('#photo-title').html(`${imagesData[currentPhoto].title}`);
+    $('#photo-description').html(`${imagesData[currentPhoto].description}`);
+    $('.box').css("border-color", "white");
+    $(`#${imagesData[currentPhoto].title}`).css("border-color", "black");
+}
+
+$('#rightButton').click(function() {
+    if (currentPhoto >= imagesData.length - 1) {
+    } else {
+    currentPhoto++;
+    loadPhoto(currentPhoto);
+    }
+});
+
+$('#leftButton').click(function() {
+    if (currentPhoto == 0) {
+    } else {
+    currentPhoto--;
+    loadPhoto(currentPhoto);
+    }
+});
+
+imagesData.forEach((item, index) => {
+    $('.thumbnails').append(`<div class="box" id="${item.title}" data-index="${index}"><h4>${item.title}</h4></div>`);
+    $(`#${item.title}`).css("background-image", "url(" + item.photo + ")");
+    $('.box').click((event) => {
+      let indexClicked = $(event.target).attr('data-index');
+      let numberIndex = parseInt(indexClicked);
+      currentPhoto = numberIndex;
+      loadPhoto(currentPhoto)
+    });
+  });
+  
+  loadPhoto(currentPhoto);
